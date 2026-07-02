@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrepreneur Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        color-scheme: light;
+        --paper: #faf9f6;
+        --card: #ffffff;
+        --ink: #16181d;
+        --muted: #6b7280;
+        --accent: #1f6f5c;
+        --accent-soft: rgba(31, 111, 92, 0.08);
+        --border: #e6e3da;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        font-family: 'Inter', Arial, sans-serif;
+        color: var(--ink);
+        background-color: var(--paper);
+        background-image:
+            radial-gradient(circle at 1px 1px, rgba(22,24,29,0.05) 1px, transparent 0);
+        background-size: 28px 28px;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px;
+    }
+
+    .card {
+        width: min(720px, 100%);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: 0 24px 60px rgba(22, 24, 29, 0.07);
+        padding: 56px 60px 48px;
+    }
+
+    .top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .eyebrow::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: inline-block;
+    }
+
+    .tag {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.02em;
+    }
+
+    h1 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 500;
+        font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+        line-height: 1.18;
+        letter-spacing: -0.01em;
+        margin: 28px 0 18px;
+    }
+
+    h1 .highlight {
+        text-decoration: underline;
+        text-decoration-style: wavy;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 6px;
+    }
+
+    p.lede {
+        margin: 0;
+        max-width: 46ch;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.65;
+    }
+
+    .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 36px 0 28px;
+    }
+
+    .meta {
+        display: flex;
+        gap: 0;
+    }
+
+    .meta-item {
+        flex: 1;
+        padding: 0 20px;
+        border-left: 1px solid var(--border);
+    }
+
+    .meta-item:first-child {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .meta-value {
+        font-family: 'Fraunces', Georgia, serif;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    .meta-label {
+        margin-top: 4px;
+        font-size: 0.82rem;
+        color: var(--muted);
+    }
+
+    .actions {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        padding: 15px 28px;
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 0.98rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: var(--ink);
+        color: var(--paper);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn:hover {
+        background: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+    }
+
+    .btn svg {
+        transition: transform 0.15s ease;
+    }
+
+    .btn:hover svg {
+        transform: translateX(3px);
+    }
+
+    .microcopy {
+        font-size: 0.85rem;
+        color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn, .btn svg { transition: none; }
+    }
+
+    @media (max-width: 640px) {
+        .card {
+            padding: 36px 26px 32px;
+            border-radius: 16px;
+        }
+
+        .meta {
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .meta-item {
+            border-left: none;
+            padding-left: 0;
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+        }
+
+        .meta-item:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .actions {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <div class="top-row">
+                <span class="eyebrow">Founder Insights</span>
+                <span class="tag">Survey · 2026</span>
+            </div>
+
+            <h1>Tell us how you build, grow, and <span class="highlight">test new ideas</span>.</h1>
+
+            <p class="lede">A short, anonymous survey about your entrepreneurial journey </p>
+
+            <div class="divider"></div>
+
+            <div class="meta">
+                <div class="meta-item">
+                    <div class="meta-value">5 min</div>
+                    <div class="meta-label">Time to complete</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">{{question_length}}</div>
+                    <div class="meta-label">Questions</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">100%</div>
+                    <div class="meta-label">Anonymous</div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a class="btn" href="#" role="button">
+                    Start the survey
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <span class="microcopy">Your answers help shape tools built for founders like you.</span>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
