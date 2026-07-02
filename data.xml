@@ -41,6 +41,14 @@
   </Section>
 
   <Section id="2" name="Entrepreneurial Intention">
+     <Options>
+      <Option value="1">Strongly Disagree</Option>
+      <Option value="2">Disagree</Option>
+      <Option value="3">Neutral</Option>
+      <Option value="4">Agree</Option>
+      <Option value="5">Strongly Agree</Option>
+    </Options>
+
     <Question id="EI1" type="likert-5">
       <Text>I am ready to do anything to be an entrepreneur</Text>
     </Question>
@@ -63,6 +71,13 @@
   </Section>
 
   <Section id="3" name="Supportive University Entrepreneurial Ecosystem">
+    <Options>
+      <Option value="1">Strongly Disagree</Option>
+      <Option value="2">Disagree</Option>
+      <Option value="3">Neutral</Option>
+      <Option value="4">Agree</Option>
+      <Option value="5">Strongly Agree</Option>
+    </Options>
 
     
       <Question id="PES1" type="likert-5">
@@ -116,6 +131,14 @@
   </Section>
 
   <Section id="4" name="Entrepreneurial Skills">
+    <Options>
+      <Option value="1">No aptitude at all</Option>
+      <Option value="2">A little aptitude</Option>
+      <Option value="3">Average aptitude</Option>
+      <Option value="4">High aptitude</Option>
+      <Option value="5">Very high aptitude</Option>
+    </Options>
+
     <Instruction>How do you rate yourself on the following entrepreneurial abilities/skill sets?</Instruction>
    
     <Question id="ES1" type="likert-5">
@@ -140,6 +163,13 @@
   </Section>
 
   <Section id="5" name="Entrepreneurial Self-Efficacy">
+    <Options>
+      <Option value="1">Strongly Disagree</Option>
+      <Option value="2">Disagree</Option>
+      <Option value="3">Neutral</Option>
+      <Option value="4">Agree</Option>
+      <Option value="5">Strongly Agree</Option>
+    </Options>
    
     <Question id="ESE1" type="likert-5">
       <Text>I am confident in my ability to successfully identify new business opportunities</Text>
@@ -160,6 +190,13 @@
   </Section>
 
   <Section id="6" name="Digital Competencies">
+      <Options>
+      <Option value="1">Strongly Disagree</Option>
+      <Option value="2">Disagree</Option>
+      <Option value="3">Neutral</Option>
+      <Option value="4">Agree</Option>
+      <Option value="5">Strongly Agree</Option>
+    </Options>
 
    
       

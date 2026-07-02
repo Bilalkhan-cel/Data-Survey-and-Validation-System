@@ -253,13 +253,19 @@
                 </div>
             </div>
 
-            <div class="actions">
-                <a class="btn" href="#" role="button">
-                    Start the survey
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+            <div class="actions" >
+                 <form action="{{ url_for('survey') }}" method="GET">
+        <button type="submit" class="btn">
+            Start the Survey
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </form>
                 <span class="microcopy">Your answers help shape tools built for founders like you.</span>
             </div>
         </section>

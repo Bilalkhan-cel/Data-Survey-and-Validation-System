@@ -1,13 +1,15 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template , request ,url_for
+
 from flask_sqlalchemy import SQLAlchemy
-from Data_extraction_XML import extract_columns
+from Data_extraction_XML import extract_columns , extract_questions
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
 db = SQLAlchemy(app)
 
 cols = extract_columns("data.xml")
+ques=extract_questions("data.xml")
 
 
 class survey_data(db.Model):
@@ -33,9 +35,17 @@ def init_db():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("index.html",question_length=len(cols))
+   
+        
+     return render_template("index.html",question_length=len(cols))
 
 
+@app.route('/survey',methods=['GET','POST'])
+def survey():
+    return render_template("survey.html",question=ques)
+    
+    
+    
 if __name__ == "__main__":
     with app.app_context():
         init_db()

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Document</title>
+    <style>
+        /* Hide the Likert questions and the Next button by default */
+        #main-questions {
+            display: none;
+        }
+        #next-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .question-block {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey</h1>
+
+    <form id="survey-form" action="/submit-endpoint" method="POST">
+        
+        <!-- SECTION 1: Preliminary Non-Likert Questions -->
+        <div id="intro-questions">
+            <h3>Initial Information</h3>
+            
+            <div class="question-block">
+                <label for="name">Name:</label>
+                <!-- The 'required' attribute makes this mandatory -->
+                <input type="text" id="name" name="name" class="mandatory-input" required>
+            </div>
+            
+            <div class="question-block">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" class="mandatory-input" required>
+            </div>
+
+            <!-- Button appears only when inputs above are filled -->
+            <button type="button" id="next-btn">Go to Question 1</button>
+        </div>
+
+        <!-- SECTION 2: Likert Scale Questions -->
+        <div id="main-questions">
+            <h3>Likert Scale Questions</h3>
+            
+            <!-- Assuming you are using a template engine like Jinja/Django to loop through questions -->
+            <div class="question-block">
+                <h4>1. {{question}}</h4>
+                <!-- Your Likert radio buttons would go here -->
+                <label><input type="radio" name="q1" value="1" required> Strongly Disagree</label>
+                <label><input type="radio" name="q1" value="2"> Disagree</label>
+                <label><input type="radio" name="q1" value="3"> Neutral</label>
+                <label><input type="radio" name="q1" value="4"> Agree</label>
+                <label><input type="radio" name="q1" value="5"> Strongly Agree</label>
+            </div>
+            
+            <!-- Additional questions go here... -->
+
+            <br>
+            <button type="submit">Submit Survey</button>
+        </div>
+
+    </form>
+
+    <script>
+        // Select the necessary elements
+        const mandatoryInputs = document.querySelectorAll('.mandatory-input');
+        const nextBtn = document.getElementById('next-btn');
+        const introSection = document.getElementById('intro-questions');
+        const mainSection = document.getElementById('main-questions');
+
+        // Function to check if all mandatory fields have values
+        function checkInputs() {
+            let allFilled = true;
+            
+            mandatoryInputs.forEach(input => {
+                // If any input is empty, set allFilled to false
+                if (input.value.trim() === '') {
+                    allFilled = false;
+                }
+            });
+
+            // Show or hide the button based on the check
+            if (allFilled) {
+                nextBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'none';
+            }
+        }
+
+        // Add an event listener to each input so it checks every time the user types
+        mandatoryInputs.forEach(input => {
+            input.addEventListener('input', checkInputs);
+        });
+
+        // When the "Go to Question 1" button is clicked, switch sections
+        nextBtn.addEventListener('click', () => {
+            introSection.style.display = 'none';
+            mainSection.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
