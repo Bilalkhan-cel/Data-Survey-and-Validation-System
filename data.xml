@@ -22,7 +22,7 @@
         <Option value="1">BS or equivalent</Option>
         <Option value="2">MS or equivalent</Option>
         <Option value="3">Ph.D.</Option>
-        <Option value="4" allowsOtherText="true">Other (Please specify)</Option>
+        <Option value="4" allowsOtherText="true">Other</Option>
       </Options>
     </Question>
 
@@ -35,7 +35,7 @@
       <Options>
         <Option value="1">Private Sector</Option>
         <Option value="2">Public Sector</Option>
-        <Option value="3" allowsOtherText="true">Other (Please specify)</Option>
+        <Option value="3" allowsOtherText="true">Other</Option>
       </Options>
     </Question>
   </Section>

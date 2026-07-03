@@ -8,7 +8,7 @@ for x in myroot.findall("Section"):
     
     for z in x.findall("Options"):
         for w in z.findall("Option"):
-            myans.append(w.text)
+            myans.append(w.get("value"))
     
     
     for y in x.findall("Question"):

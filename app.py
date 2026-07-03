@@ -1,15 +1,18 @@
 import os
-from flask import Flask, render_template , request ,url_for
+from flask import Flask, render_template , request ,url_for , session
 
 from flask_sqlalchemy import SQLAlchemy
-from Data_extraction_XML import extract_columns , extract_questions
+from Data_extraction_XML import extract_columns , extract_questions_ans_value
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+app.config['SECRET_KEY'] = 'testing123'
 db = SQLAlchemy(app)
 
+
 cols = extract_columns("data.xml")
-ques=extract_questions("data.xml")
+question=extract_questions_ans_value("data.xml")
+questions = list(question.items())
 
 
 class survey_data(db.Model):
@@ -21,7 +24,7 @@ for col in cols:
     setattr(
         survey_data,
         col,
-        db.Column(db.String(20), nullable=False)
+        db.Column(db.String(250), nullable=False)
     )
 
 def init_db():
@@ -42,7 +45,32 @@ def home():
 
 @app.route('/survey',methods=['GET','POST'])
 def survey():
-    return render_template("survey.html",question=ques)
+
+    if "index" not in session:
+        session["index"] = 0
+        session["answers"] = []
+
+    if request.method == "POST":
+        answer = request.form["answer"]
+
+        answers = session["answers"]
+        answers.append(answer)
+        session["answers"] = answers
+
+        session["index"] += 1
+
+    if session["index"] >= len(questions):
+        print(session["answers"])      # <-- Your complete list
+        return "Survey Complete"
+
+    question, options = questions[session["index"]]
+
+    return render_template(
+        "survey.html",
+        question=question,
+        options=options,
+        last_question=session["index"] == len(questions)-1
+    )
     
     
     
