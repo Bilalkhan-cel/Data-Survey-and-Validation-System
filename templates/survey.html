@@ -1,31 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Survey Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --paper: #faf9f6;
+            --card: #ffffff;
+            --ink: #16181d;
+            --muted: #6b7280;
+            --accent: #1f6f5c;
+            --accent-soft: rgba(31, 111, 92, 0.08);
+            --border: #e6e3da;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            color: var(--ink);
+            background-color: var(--paper);
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(22, 24, 29, 0.05) 1px, transparent 0);
+            background-size: 28px 28px;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 32px 16px;
+        }
+
+        .card {
+            width: min(640px, 100%);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 24px 60px rgba(22, 24, 29, 0.07);
+            padding: 56px 60px 48px;
+            animation: cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: inline-block;
+        }
+
+        .tag {
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+
+        h3.question {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 500;
+            font-size: clamp(1.5rem, 2.6vw, 2rem);
+            line-height: 1.32;
+            letter-spacing: -0.01em;
+            margin: 26px 0 0;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 32px 0 30px;
+        }
+
+        /* ---- Radio options ---- */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            cursor: pointer;
+            background: var(--card);
+            transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            animation: optionIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .options .option:nth-child(1) {
+            animation-delay: 0.04s;
+        }
+
+        .options .option:nth-child(2) {
+            animation-delay: 0.08s;
+        }
+
+        .options .option:nth-child(3) {
+            animation-delay: 0.12s;
+        }
+
+        .options .option:nth-child(4) {
+            animation-delay: 0.16s;
+        }
+
+        .options .option:nth-child(5) {
+            animation-delay: 0.2s;
+        }
+
+        .options .option:nth-child(6) {
+            animation-delay: 0.24s;
+        }
+
+        .options .option:nth-child(n+7) {
+            animation-delay: 0.28s;
+        }
+
+        @keyframes optionIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .option:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateY(-1px);
+        }
+
+        .option:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        .option:has(input:checked) {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            box-shadow: 0 6px 16px -9px rgba(31, 111, 92, 0.45);
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 19px;
+            height: 19px;
+            min-width: 19px;
+            margin: 0;
+            border-radius: 50%;
+            border: 2px solid #D6D3C6;
+            box-shadow: inset 0 0 0 0 var(--accent);
+            cursor: pointer;
+            transition: box-shadow 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
+        }
+
+        input[type="radio"]:checked {
+            border-color: var(--accent);
+            box-shadow: inset 0 0 0 5.5px var(--accent);
+        }
+
+        input[type="radio"]:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .option-text {
+            font-size: 0.98rem;
+            font-weight: 450;
+            color: var(--ink);
+            line-height: 1.45;
+        }
+
+        /* ---- Text input fallback ---- */
+        .text-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--ink);
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft);
+        }
+
+        .text-input::placeholder {
+            color: var(--muted);
+        }
+
+        /* ---- Actions / submit ---- */
+        .actions {
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            appearance: none;
+            border: none;
+            border-radius: 999px;
+            padding: 15px 28px;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--ink);
+            color: var(--paper);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .btn svg {
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        .microcopy {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 36px 26px 32px;
+                border-radius: 16px;
+            }
+
+            h3.question {
+                font-size: 1.4rem;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h3>{{ question }}</h3>
+    <main class="page">
+        <section class="card">
+            <div class="top-row">
+                <span class="eyebrow">Founder Insights</span>
+                <span class="tag">
+                    {% if last_question %}
+                    Final question
+                    {% else %}
+                    Survey question
+                    {% endif %}
+                </span>
+            </div>
 
-{% if options %}
-    {% for option in options %}
-        <input type="radio"
-               name="answer"
-               value="{{ option.keys()|list|first }}"
-               required>
-        {{ option.values()|list|first }}<br>
-    {% endfor %}
-{% else %}
-    <input type="text" name="answer" required>
-{% endif %}
+            <h3 class="question">{{ question }}</h3>
 
-<button type="submit">
+            <div class="divider"></div>
+
+            <form action="{{ url_for('survey') }}" method="POST">
+                {% if options %}
+                <div class="options">
+                    {% for option in options %}
+                    <label class="option">
+                        <input type="radio" name="answer" value="{{ option.keys()|list|first }}" required>
+                        <span class="option-text">{{ option.values()|list|first }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <input type="text" name="answer" required class="text-input" placeholder="Type your answer">
+                {% endif %}
+
+                <div class="actions">
+                    <button type="submit" class="btn">
+                        {% if last_question %}
+                        Submit
+                        {% else %}
+                        Next
+                        {% endif %}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <span class="microcopy">Your answers help shape tools built for founders like you.</span>
+                </div>
+            </form>
+        </section>
+    </main>
+    <!-- <button type="submit">
     {% if last_question %}
         Submit
     {% else %}
         Next
     {% endif %}
-</button>
+</button> -->
 </body>
+
 </html>
