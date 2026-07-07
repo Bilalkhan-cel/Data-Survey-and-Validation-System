@@ -1,12 +1,15 @@
 import os
 from flask import Flask, render_template , request ,url_for , session ,redirect
+from dotenv import load_dotenv
+import os
 
 from flask_sqlalchemy import SQLAlchemy
 from Data_extraction_XML import extract_columns , extract_questions_ans_value
 # bad ka task ke question categoty bhi print karnani he form pe
+load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
-app.config['SECRET_KEY'] = 'testing123de'
+app.config['SECRET_KEY'] = os.getenv("SESSION_SECRET_KEY")
 db = SQLAlchemy(app)
 
 
@@ -49,19 +52,31 @@ def survey():
     if "index" not in session:
        session["index"] = 0
        session["answers"] = []
-
+    
+    if "fast_ans" not in session:
+        session["fast_ans"]=0
+        
     if request.method == "POST":
         answer = request.form.get("answer")
+        response_time = float(request.form["response_time"])
 
         answers = session["answers"]
         answers.append(answer)
         session["answers"] = answers
+        if response_time <= 3:
+          session["fast_ans"] += 1
 
         session["index"] += 1
 
     if session["index"] >= len(questions):
         if session.get("survey_completed"):
             return render_template("thanks.html")
+        
+        fast_answer=session["fast_ans"]
+        if fast_answer > len(questions)/2:
+            print(fast_answer)
+            return render_template("thanks.html")
+            
         
         print(session["answers"]) 
         survey_answers=session['answers']

@@ -356,7 +356,7 @@
                 {% else %}
                 <input type="text" name="answer" required class="text-input" placeholder="Type your answer">
                 {% endif %}
-
+                <input type="hidden" name="response_time" id="response_time">
                 <div class="actions">
                     <button type="submit" class="btn">
                         {% if last_question %}
@@ -374,13 +374,19 @@
             </form>
         </section>
     </main>
-    <!-- <button type="submit">
-    {% if last_question %}
-        Submit
-    {% else %}
-        Next
-    {% endif %}
-</button> -->
+    <script>
+    // Timer starts as soon as the page is loaded
+    const questionStartTime = performance.now();
+
+    document.querySelector("form").addEventListener("submit", function () {
+
+        // Time taken in seconds
+        const responseTime = (performance.now() - questionStartTime) / 1000;
+
+        // Store it in hidden input
+        document.getElementById("response_time").value = responseTime.toFixed(3);
+    });
+</script>
 </body>
 
 </html>
