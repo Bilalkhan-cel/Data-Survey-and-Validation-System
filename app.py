@@ -60,7 +60,7 @@ with app.app_context():
 @app.after_request
 def allow_iframe(response):
     response.headers.pop("X-Frame-Options", None)
-    response.headers["Content-Security-Policy"] = "frame-ancestors 'self' *;"
+    response.headers["Content-Security-Policy"] = "frame-ancestors https:;"
     return response
 
 
