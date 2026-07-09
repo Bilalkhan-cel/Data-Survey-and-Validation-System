@@ -8,7 +8,9 @@ from Data_extraction_XML import extract_columns , extract_questions_ans_value
 # bad ka task ke question categoty bhi print karnani he form pe
 load_dotenv()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'DATABASE_URL'
+)
 app.config['SECRET_KEY'] = os.getenv("SESSION_SECRET_KEY")
 db = SQLAlchemy(app)
 
