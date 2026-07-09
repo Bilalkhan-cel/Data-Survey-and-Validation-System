@@ -8,11 +8,6 @@ from Data_extraction_XML import extract_columns , extract_questions_ans_value
 # bad ka task ke question categoty bhi print karnani he form pe
 load_dotenv()
 app = Flask(__name__)
-@app.after_request
-def allow_iframe(response):
-    response.headers.pop("X-Frame-Options", None)
-    response.headers["Content-Security-Policy"] = "frame-ancestors *;"
-    return response
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
@@ -48,6 +43,12 @@ def init_db():
     except Exception as e:
         print("DB error:", e)
         raise  
+
+@app.after_request
+def allow_iframe(response):
+    response.headers.pop("X-Frame-Options", None)
+    response.headers["Content-Security-Policy"] = "frame-ancestors *;"
+    return response
 
 
 @app.route('/', methods=['GET', 'POST'])
