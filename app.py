@@ -126,4 +126,4 @@ def survey():
 if __name__ == "__main__":
     # Only used for local development — on Vercel this block never runs;
     # the `app` object above is imported directly by the serverless runtime.
-    app.run(debug=True)
+    app.run()
