@@ -12,6 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
     'DATABASE_URL'
 )
 app.config['SECRET_KEY'] = os.getenv("SESSION_SECRET_KEY")
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_SECURE"] = True
 db = SQLAlchemy(app)
 
 
@@ -102,6 +104,15 @@ def survey():
         options=options,
         last_question=session["index"] == len(questions)-1
     )
+
+
+@app.after_request
+def allow_iframe(response):
+    response.headers.pop("X-Frame-Options", None)
+    response.headers["Content-Security-Policy"] = "frame-ancestors *;"
+    return response
+
+
 
     
 if __name__ == "__main__":
