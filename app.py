@@ -47,7 +47,7 @@ def init_db():
 @app.after_request
 def allow_iframe(response):
     response.headers.pop("X-Frame-Options", None)
-    response.headers["Content-Security-Policy"] = "frame-ancestors *;"
+    response.headers["Content-Security-Policy"] = "frame-ancestors 'self' *;"
     return response
 
 
