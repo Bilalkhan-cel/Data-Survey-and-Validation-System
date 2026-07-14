@@ -30,6 +30,7 @@ questions = list(question.items())
 
 class survey_data(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    is_bad = db.Column(db.Integer, default=0)
 
 
 for col in cols:
@@ -49,10 +50,7 @@ def init_db():
         raise
 
 
-# IMPORTANT: this runs at IMPORT time now, not inside `if __name__ == "__main__"`.
-# On Vercel your module is imported directly by the serverless runtime and
-# __main__ never executes there — so create_all() would otherwise never run,
-# and your table would never get created in production.
+
 with app.app_context():
     init_db()
 
@@ -96,17 +94,15 @@ def survey():
             return render_template("thanks.html")
 
         fast_answer = session["fast_ans"]
-        if fast_answer > len(questions) / 2:
-            print(fast_answer)
-            return render_template("thanks.html")
-
-        print(session["answers"])
         survey_answers = session['answers']
         data = {}
         for col, ans in zip(cols, survey_answers):
             data[col] = ans
 
-        survey = survey_data(**data)
+        survey = survey_data(
+            is_bad=1 if fast_answer > len(questions) / 2 else 0,
+            **data,
+        )
         db.session.add(survey)
         db.session.commit()
         session["survey_completed"] = True
