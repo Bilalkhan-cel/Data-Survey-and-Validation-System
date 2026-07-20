@@ -327,8 +327,12 @@
 
 <body>
     <main class="page">
+        {% if img %}
+        <img src="{{ img.src }}" width="{{ img.width }}" height="{{ img.height }}">
+        {% endif %}
         <section class="card">
             <div class="top-row">
+                <small>{{ col_id }}</small>
                 <span class="eyebrow">Founder Insights</span>
                 <span class="tag">
                     {% if last_question %}
@@ -375,18 +379,18 @@
         </section>
     </main>
     <script>
-    // Timer starts as soon as the page is loaded
-    const questionStartTime = performance.now();
+        // Timer starts as soon as the page is loaded
+        const questionStartTime = performance.now();
 
-    document.querySelector("form").addEventListener("submit", function () {
+        document.querySelector("form").addEventListener("submit", function () {
 
-        // Time taken in seconds
-        const responseTime = (performance.now() - questionStartTime) / 1000;
+            // Time taken in seconds
+            const responseTime = (performance.now() - questionStartTime) / 1000;
 
-        // Store it in hidden input
-        document.getElementById("response_time").value = responseTime.toFixed(3);
-    });
-</script>
+            // Store it in hidden input
+            document.getElementById("response_time").value = responseTime.toFixed(3);
+        });
+    </script>
 </body>
 
 </html>

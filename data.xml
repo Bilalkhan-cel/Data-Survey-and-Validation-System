@@ -49,23 +49,31 @@
       <Option value="5">Strongly Agree</Option>
     </Options>
 
+    
+
     <Question id="EI1" type="likert-5">
       <Text>I am ready to do anything to be an entrepreneur</Text>
+      <image src="static/images/1.png" width="200" height="150"/>
     </Question>
     <Question id="EI2" type="likert-5">
       <Text>My professional goal is to become an entrepreneur</Text>
+      <image src="static/images/2.png" width="200" height="150"/>
     </Question>
     <Question id="EI3" type="likert-5">
       <Text>I will make every effort to start and run my own firm</Text>
+      <image src="static/images/3.png" width="200" height="150"/>
     </Question>
     <Question id="EI4" type="likert-5">
       <Text>I am determined to create a firm in the future</Text>
+      <image src="static/images/4.png" width="200" height="150"/>
     </Question>
     <Question id="EI5" type="likert-5">
       <Text>I have very seriously thought of starting a firm</Text>
+      <image src="static/images/5.png" width="200" height="150"/>
     </Question>
     <Question id="EI6" type="likert-5">
       <Text>I have the firm intention to start a firm some day</Text>
+
     </Question>
     
   </Section>
@@ -78,6 +86,8 @@
       <Option value="4">Agree</Option>
       <Option value="5">Strongly Agree</Option>
     </Options>
+
+    
 
     
       <Question id="PES1" type="likert-5">
@@ -138,6 +148,7 @@
       <Option value="4">High aptitude</Option>
       <Option value="5">Very high aptitude</Option>
     </Options>
+   
 
     <Instruction>How do you rate yourself on the following entrepreneurial abilities/skill sets?</Instruction>
    
@@ -170,6 +181,7 @@
       <Option value="4">Agree</Option>
       <Option value="5">Strongly Agree</Option>
     </Options>
+    
    
     <Question id="ESE1" type="likert-5">
       <Text>I am confident in my ability to successfully identify new business opportunities</Text>
@@ -197,6 +209,7 @@
       <Option value="4">Agree</Option>
       <Option value="5">Strongly Agree</Option>
     </Options>
+   
 
    
       
