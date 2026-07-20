@@ -53,7 +53,7 @@
 
     <Question id="EI1" type="likert-5">
       <Text>I am ready to do anything to be an entrepreneur</Text>
-      <image src="static/images/1.png" width="200" height="150"/>
+      <image src="static/images/1.png" width="500%" height="500%"/>
     </Question>
     <Question id="EI2" type="likert-5">
       <Text>My professional goal is to become an entrepreneur</Text>
@@ -61,7 +61,7 @@
     </Question>
     <Question id="EI3" type="likert-5">
       <Text>I will make every effort to start and run my own firm</Text>
-      <image src="static/images/3.png" width="200" height="150"/>
+      <image src="static/images/3.png" width="100%" height="100%"/>
     </Question>
     <Question id="EI4" type="likert-5">
       <Text>I am determined to create a firm in the future</Text>

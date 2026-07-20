@@ -10,10 +10,6 @@ load_dotenv()
 app = Flask(__name__)
 
 database_url = os.getenv('DATABASE_URL')
-# # SQLAlchemy 1.4+ requires "postgresql://", but many hosts still hand you
-# # "postgres://" in the env var. Normalize it so this doesn't blow up at runtime.
-if database_url and database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] =database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -70,6 +66,7 @@ def home():
 
 @app.route('/survey', methods=['GET', 'POST'])
 def survey():
+    img=None
 
     if "index" not in session:
         session["index"] = 0
@@ -79,8 +76,7 @@ def survey():
         session["fast_ans"] = 0
 
     if request.method == "POST":
-        col_id=cols[session["index"]]
-        img=images.get(col_id)
+       
         answer = request.form.get("answer")
         response_time = float(request.form["response_time"])
 
@@ -113,6 +109,9 @@ def survey():
         return render_template("thanks.html")
 
     question, options = questions[session["index"]]
+    
+    col_id = cols[session["index"]]
+    img = images.get(col_id)
 
     return render_template(
         "survey.html",
@@ -127,4 +126,4 @@ def survey():
 if __name__ == "__main__":
     # Only used for local development — on Vercel this block never runs;
     # the `app` object above is imported directly by the serverless runtime.
-    app.run()
+    app.run(debug=True)
