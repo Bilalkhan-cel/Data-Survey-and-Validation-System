@@ -328,11 +328,11 @@
 <body>
     <main class="page">
         {% if img %}
-        <img src="{{ img.src }}" width="{{ img.width }}" height="{{ img.height }}">
+        <img src="{{ img.src }}" width="{{ img.width }}" height="{{ img.height }}" position="{{img.position}}" top="{{img.top}}" opacity="{{img.opacity}}" left="{{img.left}}" rotate="{{img.rotate}}" fit="{{img.fit}}">
         {% endif %}
         <section class="card">
             <div class="top-row">
-                <small>{{ col_id }}</small>
+                
                 <span class="eyebrow">Founder Insights</span>
                 <span class="tag">
                     {% if last_question %}
